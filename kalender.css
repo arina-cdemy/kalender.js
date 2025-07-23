@@ -1,0 +1,156 @@
+body { 
+
+     
+    background-image:url(forest-9568429_1280.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(240, 240, 240);
+    color: rgb(34, 34, 34);
+    border: 50px solid rgba(34, 30, 30, 0);
+}
+
+.grid-container {
+    page-orientation: landscape;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+
+
+.seitenkopf {
+    text-align: center;
+    background-color: rgba(123, 164, 177, 0);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.introtext {
+    pos
+    text-align: justify;
+    font-size: medium;
+    list-style: none;
+    margin: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.historischertext {
+    text-align: justify;
+    font-size: medium;
+    list-style: none;
+    margin: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.date-grid,
+.day-of-week {
+
+    position: relative;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+    margin: 5px;
+    
+
+}
+.day-of-week {
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(123, 164, 177, 0.493);
+    padding: 20px 0
+}
+.date-grid button {
+    background-color: #ffffff00;
+    font-weight: bold;
+    
+    border: 1px  rgba(34, 30, 30, 0);
+    border-radius: cap;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.date-grid button:hover {
+    background-color: rgba(123, 164, 177, 0.493);
+}
+.date-grid button:focus {
+    outline: none;
+    background-color: rgba(123, 164, 177, 0.493);
+}
+p {
+    font-weight: normal;
+    font-size: medium;
+    line-height: 1.5;
+    margin: 0;
+}
+
+
+.title {
+    text-align: center;
+    font-size: 15px;
+    color: #667c94;
+    margin-bottom: 10px;
+} 
+p1 {
+    
+    font-weight: bold;
+    font-size: medium;
+    color: #000000;
+    padding: 10px;
+    margin: 10px;
+}
+
+.list-container {
+    float:right;
+    display: flex;
+    flex-direction: column;
+    align-items: left ;
+    justify-content: left;
+    background-color: rgba(58, 41, 41, 0);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: large;
+    color: rgba(198, 233, 233, 0.623);
+}
+
+#überschrift {
+    font-weight: bold;
+    text-align: start;
+    font-size: 20px;
+    color: #181c20;
+    margin-bottom: 12px;
+    padding: 12px;
+}
+.list-item {
+    margin: 5px 0;
+    padding: 5px;
+    border-bottom: 1px solid #ffffff00;
+    transition: all;
+    cursor: pointer;
+}
+.list-item.completed {
+    text-decoration: none;
+    color: #999999;
+}
+.list-item button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    font-size: inherit;
+    padding: 0;
+}
+.list-item button:hover {
+    text-decoration: underline;
+}
