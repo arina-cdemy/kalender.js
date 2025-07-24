@@ -1,6 +1,4 @@
-body { 
-
-     
+body {  
     background-image:url(forest-9568429_1280.webp);
     background-size: cover;
     background-position: center;
@@ -22,9 +20,8 @@ body {
     margin: auto;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
+    
 }
-
-
 
 .seitenkopf {
     text-align: center;
@@ -36,7 +33,7 @@ body {
 }
 
 .introtext {
-    
+
     text-align: justify;
     font-size: medium;
     list-style: none;
@@ -58,10 +55,10 @@ body {
     position: relative;
     margin: 20px;
     display: grid;
+    
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 5px;
     margin: 5px;
-    
 
 }
 .day-of-week {
@@ -73,7 +70,7 @@ body {
 .date-grid button {
     background-color: #ffffff00;
     font-weight: bold;
-    
+    column-rule-color: #667c94;
     border: 1px  rgba(34, 30, 30, 0);
     border-radius: cap;
     padding: 20px;
@@ -94,7 +91,6 @@ p {
     margin: 0;
 }
 
-
 .title {
     text-align: center;
     font-size: 15px;
@@ -112,7 +108,6 @@ p1 {
 
 .list-container {
     float:right;
-    display: flex;
     flex-direction: column;
     align-items: left ;
     justify-content: left;
@@ -153,4 +148,38 @@ p1 {
 }
 .list-item button:hover {
     text-decoration: underline;
+}
+
+.samstag {
+    background-position: 0%
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #ffffff;
+}
+.sonntag {
+    background-position: 0%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #ffffff;
+}   
+
+.samstag:hover,
+.sonntag:hover {
+    background-color: rgba(123, 164, 177, 0.493);
+}   
+
+.heute {
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    background-color: #11111100;
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-color: rgb(0, 0, 0);
+    padding: 10px 10px;
+    margin: 0px 20px;
+    cursor: pointer;
+}   
+.heute:hover {
+    background-color: rgba(107, 168, 187, 0.493);
 }

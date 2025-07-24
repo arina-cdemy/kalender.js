@@ -7,16 +7,18 @@
 </head>
 
 <body>
-<div class="grid_container">
+<div class="grid_container" style="display: grid; grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; gap: 10px;">
   <div class="seitenkopf">
     <h1>Kalenderblatt vom 14.07.2025</h1>
+  </div>
+  <div class="button-container">
+    <button class="heute">Heute</button>
   </div>
   <div class="introtext">
     <p>
     Der 14.07.2025 ist ein Montag und zwar der 2. Montag im 
     Monat Juli des Jahres 2025. Heute ist kein gesetzlicher 
-    Feiertag. Der nächste gesetzliche Feiertag ist der 
-    03.10.2025.
+    Feiertag. Der nächste gesetzliche Feiertag ist der 03.10.2025.
     </p>
   </div>
   <div class="historischertext">
@@ -41,8 +43,8 @@
       <div>Mi</div>
       <div>Do</div>
       <div>Fr</div>
-      <div>Sa</div>
-      <div>So</div>
+      <div class = "Samstag">Sa</div>
+      <div class ="Sonntag">So</div>
   </div>
   <div class="date-grid" style="float: center;">
       <button><time datetime=2025-06-30></time>30</button>
@@ -50,29 +52,29 @@
       <button><time datetime=2025-07-02></time>2</button>
       <button><time datetime=2025-07-03></time>3</button>
       <button><time datetime=2025-07-04></time>4</button>
-      <button><time datetime=2025-07-05></time>5</button>
-      <button><time datetime=2025-07-06></time>6</button>
+      <button class="Samstag"><time datetime=2025-07-05></time>5</button>
+      <button class="Sonntag"><time datetime=2025-07-06></time>6</button>
       <button><time datetime=2025-07-07></time>7</button>
       <button><time datetime=2025-07-08></time>8</button>
       <button><time datetime=2025-07-09></time>9</button>
       <button><time datetime=2025-07-10></time>10</button>
       <button><time datetime=2025-07-11></time>11</button>
-      <button><time datetime=2025-07-12></time>12</button>
-      <button><time datetime=2025-07-13></time>13</button>
+      <button class="Samstag"><time datetime=2025-07-12></time>12</button>
+      <button class="Sonntag"><time datetime=2025-07-13></time>13</button>
       <button class="today"><time datetime=2025-07-14></time>14</button>
       <button><time datetime=2025-07-15></time>15</button>
       <button><time datetime=2025-07-16></time>16</button>
       <button><time datetime=2025-07-17></time>17</button>
       <button><time datetime=2025-07-18></time>18</button>
-      <button><time datetime=2025-07-19></time>19</button>
-      <button><time datetime=2025-07-20></time>20</button>
+      <button class="Samstag"><time datetime=2025-07-19></time>19</button>
+      <button class="Sonntag"><time datetime=2025-07-20></time>20</button>
       <button><time datetime=2025-07-21></time>21</button>
       <button><time datetime=2025-07-22></time>22</button>
       <button><time datetime=2025-07-23></time>23</button>
       <button><time datetime=2025-07-24></time>24</button>
       <button><time datetime=2025-07-25></time>25</button>
-      <button><time datetime=2025-07-26></time>26</button>
-      <button><time datetime=2025-07-27></time>27</button>
+      <button class="Samstag"><time datetime=2025-07-26></time>26</button>
+      <button class="Sonntag"><time datetime=2025-07-27></time>27</button>
       <button><time datetime=2025-07-28></time>28</button>
       <button><time datetime=2025-07-29></time>29</button>
       <button><time datetime=2025-07-30></time>30</button>
@@ -80,18 +82,15 @@
 
   </div>
 
- 
-  <div class="list-container" style="float:right">
-    <h2 id="überschrift"> Historische Ereignisse am 14. Juli</h2>
-
-      
-      <ul>
+  <div class="list-container" style="float:center">
+    <h2 id="überschrift" style="text-align: center;"> Wichtige Ereignisse am 14. Juli</h2>
+    <ul>
       <li class="list-item"><button>1789: Sturm auf die Bastille, Beginn der Französischen Revolution</button></li>
       <li class="list-item"><button>1790: Föderationsfest in Paris, Feier des Nationalfeiertags</button></li>
       <li class="list-item"><button>1881: Tod von Jesse James, amerikanischer Outlaw</button></li>
       <li class="list-item"><button>1965: Start der Mariner 4 Mission zum Mars</button></li>
       <li class="list-item"><button>2003: Der Irakkrieg beginnt mit der Invasion durch US-Truppen</button></li>
-      </ul>
+    </ul>
   </div>
   
 </div>
