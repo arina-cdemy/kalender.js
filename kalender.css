@@ -97,14 +97,6 @@ p {
     color: #667c94;
     margin-bottom: 10px;
 } 
-p1 {
-    
-    font-weight: bold;
-    font-size: medium;
-    color: #000000;
-    padding: 10px;
-    margin: 10px;
-}
 
 .list-container {
     float:right;
