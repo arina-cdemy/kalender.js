@@ -48,8 +48,21 @@ body {
     margin: 20px;
     color: rgb(0, 0, 0);
 }
-
-.date-grid,
+.date-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+    margin: 20px;
+}
+.date-grid div  {
+    background-color: rgba(123, 164, 177, 0.493);
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 .day-of-week {
 
     position: relative;
@@ -59,31 +72,17 @@ body {
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 5px;
     margin: 5px;
+    fit-content: ;
 
 }
-.day-of-week {
+.day-of-week  {
     font-weight: bold;
     text-align: center;
     background-color: rgba(123, 164, 177, 0.493);
     padding: 20px 0
 }
-.date-grid button {
-    background-color: #ffffff00;
-    font-weight: bold;
-    column-rule-color: #667c94;
-    border: 1px  rgba(34, 30, 30, 0);
-    border-radius: cap;
-    padding: 20px;
-    cursor: pointer;
-}
 
-.date-grid button:hover {
-    background-color: rgba(123, 164, 177, 0.493);
-}
-.date-grid button:focus {
-    outline: none;
-    background-color: rgba(123, 164, 177, 0.493);
-}
+
 p {
     font-weight: normal;
     font-size: medium;
@@ -115,9 +114,10 @@ p {
     font-weight: bold;
     text-align: start;
     font-size: 20px;
-    color: #181c20;
+    color: #b5c3d1;
     margin-bottom: 12px;
     padding: 12px;
+    text-align: end;
 }
 .list-item {
     margin: 5px 0;
@@ -128,7 +128,7 @@ p {
 }
 .list-item.completed {
     text-decoration: none;
-    color: #999999;
+    color: #9e7a7a;
 }
 .list-item button {
     background-color: transparent;
@@ -141,25 +141,9 @@ p {
 .list-item button:hover {
     text-decoration: underline;
 }
-
-.samstag {
-    background-position: 0%
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #ffffff;
-}
-.sonntag {
-    background-position: 0%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #ffffff;
+.list-item button:focus {
+    outline: none;
 }   
-
-.samstag:hover,
-.sonntag:hover {
-    background-color: rgba(123, 164, 177, 0.493);
-}   
-
 .heute {
     position: relative;
     text-align: center;
