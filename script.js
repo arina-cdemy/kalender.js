@@ -7,5 +7,11 @@ const formattedDate = `${date}.${month}.${year}`;
 
 console.log(formattedDate); // Outputs: 14.7.2025
 
+window.onload = function() {
+    main();
+};
 
-document.getElementById("überschrift").innerHTML = "Wichtige Ereignisse am " + formattedDate;
+function main() {
+    // Your main code logic here
+}
+
