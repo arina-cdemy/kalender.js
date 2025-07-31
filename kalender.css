@@ -9,6 +9,10 @@ body {
     border: 50px solid rgba(34, 30, 30, 0);
 }
 
+span {
+    background: rgba(216, 226, 231, 0.903);
+    font-weight: bold;
+}
 
 .seitenkopf {
     text-align: center;
@@ -28,7 +32,7 @@ body {
     color: rgb(0, 0, 0);
 }
 
-.historischertext {
+.historischertext  {
     text-align: justify;
     font-size: medium;
     list-style: none;
@@ -39,7 +43,9 @@ body {
 }
 
 .calendar {
-    display: flex;
+    position: relative;
+    left: 0;
+    display: grid;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -71,9 +77,11 @@ body {
     
 }
 .day-of-week {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 .day-of-week div {
     background-color: rgba(123, 164, 177, 0.493);
@@ -93,7 +101,7 @@ p {
 }
 
 .title {
-    text-align: center;
+    text-align: left;
     font-size: 15px;
     color: #667c94;
     margin-bottom: 10px;
