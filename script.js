@@ -1,35 +1,27 @@
-// script.js
-// Funktion, um das Datum im deutschen Format zu erhalten
 
 window.onload = function() {
     main();
 }
-
 function main() {
     
-    const tag  = new Date();
-    const heute = tag.getDate(); 
+
+    let tag  = new Date();
+    let heute = tag.getDate(); 
 
 function getDateGerman(date) {
     let tag = date.getDate();
-    
-    let monat = date.toLocaleDateString("de-DE", { monat: 'long'}  )
-    
+    let monat = date.getMonth() + 1; // weil die Monate mit 0 anfangen 
     let jahr = date.getFullYear();
-    let wochentag = date.toLocaleDateString("de-DE", { weekday: 'long' }); // Gibt den Wochentag in Deutsch wieder
     if (String(tag).length == 1) {
-        tag = "0" + tag;
+        tag = "0" + tag; // formatieren
     }   
     if (String(monat).length == 1) {
         monat = "0" + monat; // Monat im Format 01-12
     }
-    if (String(jahr).length == 2) {
-        jahr = "20" + jahr;
-    }
     return `${tag}.${monat}.${jahr}`;
 }
 
-    
+
 function getWeekdayGerman(wochentag) {
     if (wochentag == 0) {
         return "Sonntag";
@@ -54,31 +46,34 @@ document.getElementById("kalender-datum").innerText = getDateGerman(date);
 
 const aktuellesDatumElem = document.getElementById("aktuelles-datum");
 if (aktuellesDatumElem) {
-    aktuellesDatumElem.innerText = getDateGerman(date);
+    aktuellesDatumElem.textContent = getDateGerman(date);
+}
 
-}
-const wochentagElem = document.getElementById("wochentag");
-if (wochentagElem) {
-    wochentagElem.innerText = getWeekdayGerman(date.getDay());
-}
-const wochentag2Elem = document.getElementById("wochentag2");
+const wochentag1Elem = document.getElementById("wochentag1");
+if (wochentag1Elem) {
+    wochentag1Elem.innerText = getWeekdayGerman(date.getDay());
+}   
+const wochentag2Elem = document.getElementById ("wochentag2");
 if (wochentag2Elem) {
-    wochentag2Elem.innerText = getWeekdayGerman(date.getDay());
+    wochentag2Elem.innerText = getWeekdayGerman (date.getDay())
 }
-const monatElem = document.getElementById("monat1");
-if (monatElem) {
-    monatElem.innerText = date.getMonth() + 1;
+const monat1Elem = document.getElementById("monat1");
+if (monat1Elem) {
+    const monate = [
+        "Januar", "Februar", "März", "April", "Mai", "Juni",
+        "Juli", "August", "September", "Oktober", "November", "Dezember"
+    ]; // Ein Array für die Namen der Monate als Strings 
+    monat1Elem.innerText = monate[date.getMonth()];
 }
-const monat2Elem = document.getElementById("monat2");
-if (monat2Elem) {
-    monat2Elem.innerText = date.getMonth() + 1;
+
+const datum1Elem = document.getElementById("datum1");
+if (datum1Elem) {
+    datum1Elem.innerText = getDateGerman(date);
 }
 const jahrElem = document.getElementById("jahr");
 if (jahrElem) {
     jahrElem.innerText = date.getFullYear();
-}
+} // Id's sind definiert
 
 
-console.log("Current date: " + getDateGerman(tag));
-console.log(`Aktuelles Datum: ${getDateGerman(tag)}`);
-}   
+} // hier endet die Funktion und kann durchgeführt werden  
