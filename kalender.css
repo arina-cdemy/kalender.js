@@ -51,7 +51,7 @@ span {
     width: 30%;
 
 }   
-.date-grid {
+.date-grid, .day-of-week {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 5px;
@@ -71,13 +71,7 @@ span {
     }       
     
 }
-.day-of-week {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap: 5px;
-    justify-content: space-between;
-    margin-bottom: 0px;
-}
+
 .day-of-week div {
     background-color: rgba(123, 164, 177, 0.493);
     padding: 20px;
@@ -99,6 +93,8 @@ p {
 }
 
 .title {
+    display:grid;
+    padding: 20;
     text-align: left;
     font-size: 15px;
     color: #667c94;
