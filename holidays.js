@@ -27,11 +27,6 @@ console.log(easter2025);
 
 
 
-import {isHoliday, getHolidays} from "feiertagejs";
-const today = new Date();
-const isHessenHoliday = isHoliday(today, "HE")
-console.log("Is heute ein Feiertag in Hessen ?" ${isHessenHoliday}`);
-
 
 
 
