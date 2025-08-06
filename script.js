@@ -133,34 +133,73 @@ function getCalendarGrid() {
 
 
   const fixedHolidays = [
-    {holidayDate:"01.01.2025", holidayName:"Neujahr"};
-    {holidayDate:"01.05.2025", holidayName:"Tag der Arbeit"};
-    {holidayDate:"03.10.2025", holidayName: "Tag der Deutschen Einheit"};
-    {holidayDate:"25.12.2025", holidayName: "1. Weihnachtstag"};
-    {holidayDate:"26.12.2025", holidayName: "2. Weihnachtstag"};
+    {day: 1, month: 0, holidayName: "Neujahr"},
+    {day: 1, month: 4, holidayName: "Tag der Arbeit"},
+    {day: 1, month: 9,holidayName: "Tag der Deutschen Einheit"},
+    {day: 25, month: 11, holidayName: "1. Weihnachtstag"},
+    {day: 26, month: 11, holidayName: "2. Weihnachtstag"},
     
-  ]
+    {day: 6, month: 7, holidayName: "Andres Geburtstag"},
+
+  ];
+
+  const churchHolidays = [
+    {easterOffset: 39, holidayName: "Christi Himmelfahrt"},
+
+  ];
   
-  function isTodayHoliday(holidayArray) {
+
+   // Calculate Easter Sunday using the Spencer algorithm.
+  function calculateEasterSunday(year){
+    const a = year % 19;
+    const b = Math.floor(year / 100);
+    const c = year % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const n = Math.floor((h + l - 7 * m + 114) / 31);
+    const o = ((h + l - 7 * m + 114) % 31) + 1;
+
+    return new Date(year, n - 1, o);
+  }
+
+
+  function isChurchHoliday(){
     const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() +1).padStart(2, "0");
-    const day = String(today:getDate()).padStart(2, "0");
-    const todayStr = `${day}.${month}.${year}`;
-    const holiday = holidayArray.find(holiday => holiday.holidayDate === todayStr); 
-      return holiday ? holiday.holidayName : false;
-    const holidayName = isTodayHolliday(fixedHollidays);
-    const holidayDate = isTodayHoliday(fixedHollidays);
-    if (holidayName){
-      console.log ("Heute ist ein Feiertag" + holidayDate + holidayName);
-    } else {
-      console.log("Heute ist kein Feiertag")
+    const easterSunday = calculateEasterSunday(today.getFullYear());
+    for (let i = 0; i < churchHolidays.length; i++){
+      const r = churchHolidays[i]; 
+      const holiday = new Date(easterSunday.getFullYear(),easterSunday.getMonth(), easterSunday.getDate() + r.easterOffset);
+      console.log(holiday);
+      if ( holiday.getDate() == today.getDate() && holiday.getMonth() == today.getMonth())
+        return true; 
     }
-    }
+    return false;
+    
 
   }
-  
-
+  function isTodayHoliday() {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    let r = fixedHolidays.find(entry => entry.day == day && entry.month == month);
+    if (r !== undefined)
+      return true;
+    return isChurchHoliday();
+    
+      
+    console.log(r);
+      return r!== undefined;
+    
+    
+}
 
 
 
@@ -171,6 +210,9 @@ function main() {
   console.log(getOverlappingDaysOfNextMonth(2025, 7));
   getCalendarGrid();
   createCalendar(date);
+  isTodayHoliday();
+  isChurchHoliday();
+  console.log(calculateEasterSunday(date.getFullYear()));
 
   document.getElementById("kalender-datum").innerText = getDateGerman(date);
 
