@@ -74,21 +74,26 @@ function createCalendar(date) {
   let daysOfMonth = daysInMonth(year, month);
   let ncells =
     prevMonthOverlap + daysOfMonth + getOverlappingDaysOfNextMonth(year, month);
-    console.log('ncells == ', ncells);
-console.log('In blah ', prevMonthOverlap, daysOfMonth, getOverlappingDaysOfNextMonth(year, month));
+  console.log("ncells == ", ncells);
+  console.log(
+    "In blah ",
+    prevMonthOverlap,
+    daysOfMonth,
+    getOverlappingDaysOfNextMonth(year, month)
+  );
   for (let i = 0; i < ncells; i++) {
     if (i < prevMonthOverlap) {
       let day = new Date(year, month, prevMonthDays - prevMonthOverlap + 1 + i);
-        console.log('Adding grey', prevMonthDays - prevMonthOverlap + 1 + i);
+      console.log("Adding grey", prevMonthDays - prevMonthOverlap + 1 + i);
       addGreyCell(grid, day);
     } else if (i - prevMonthOverlap > daysOfMonth) {
-        console.log('Here ', i, daysOfMonth);
+      console.log("Here ", i, daysOfMonth);
       let day = new Date(year, month, i - daysOfMonth);
-          console.log('Adding grey', i - daysOfMonth);
+      console.log("Adding grey", i - daysOfMonth);
       addGreyCell(grid, day);
     } else {
       let day = new Date(year, month, i - prevMonthOverlap + 1);
-          console.log('Adding normal' , i - prevMonthOverlap + 1);
+      console.log("Adding normal", i - prevMonthOverlap + 1);
       addNormalCell(grid, day);
     }
   }
@@ -97,9 +102,11 @@ console.log('In blah ', prevMonthOverlap, daysOfMonth, getOverlappingDaysOfNextM
 function addGreyCell(grid, day) {
   let newDiv = document.createElement("div");
   let newContent = document.createTextNode(day.getDate());
+
   newDiv.appendChild(newContent);
   grid.appendChild(newDiv);
-  //element.classList.add("overlap");
+  
+  newDiv.classList.add("overlap");
 }
 
 function addNormalCell(grid, day) {
@@ -110,7 +117,6 @@ function addNormalCell(grid, day) {
 }
 
 function getCalendarGrid() {
-
   /*let grid = document.getElementsByClassName("date-grid");
   if (!grid) {
     alert("Grid is not found");
@@ -122,87 +128,82 @@ function getCalendarGrid() {
   console.log(grid);
 */
   let grid = document.querySelector(".date-grid");
-   if (!grid) {
+  if (!grid) {
     alert("Grid is not found2");
 
     return null;
   }
-   grid.innerHTML = "";
+  grid.innerHTML = "";
   return grid;
 }
 
+const fixedHolidays = [
+  { day: 1, month: 0, holidayName: "Neujahr" },
+  { day: 1, month: 4, holidayName: "Tag der Arbeit" },
+  { day: 1, month: 9, holidayName: "Tag der Deutschen Einheit" },
+  { day: 25, month: 11, holidayName: "1. Weihnachtstag" },
+  { day: 26, month: 11, holidayName: "2. Weihnachtstag" },
 
-  const fixedHolidays = [
-    {day: 1, month: 0, holidayName: "Neujahr"},
-    {day: 1, month: 4, holidayName: "Tag der Arbeit"},
-    {day: 1, month: 9,holidayName: "Tag der Deutschen Einheit"},
-    {day: 25, month: 11, holidayName: "1. Weihnachtstag"},
-    {day: 26, month: 11, holidayName: "2. Weihnachtstag"},
-    
-    {day: 6, month: 7, holidayName: "Andres Geburtstag"},
+  { day: 6, month: 7, holidayName: "Andres Geburtstag" },
+];
 
-  ];
+const churchHolidays = [
+  { easterOffset: 39, holidayName: "Christi Himmelfahrt" },
+];
 
-  const churchHolidays = [
-    {easterOffset: 39, holidayName: "Christi Himmelfahrt"},
+// Calculate Easter Sunday using the Spencer algorithm.
+function calculateEasterSunday(year) {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const n = Math.floor((h + l - 7 * m + 114) / 31);
+  const o = ((h + l - 7 * m + 114) % 31) + 1;
 
-  ];
-  
-
-   // Calculate Easter Sunday using the Spencer algorithm.
-  function calculateEasterSunday(year){
-    const a = year % 19;
-    const b = Math.floor(year / 100);
-    const c = year % 100;
-    const d = Math.floor(b / 4);
-    const e = b % 4;
-    const f = Math.floor((b + 8) / 25);
-    const g = Math.floor((b - f + 1) / 3);
-    const h = (19 * a + b - d - g + 15) % 30;
-    const i = Math.floor(c / 4);
-    const k = c % 4;
-    const l = (32 + 2 * e + 2 * i - h - k) % 7;
-    const m = Math.floor((a + 11 * h + 22 * l) / 451);
-    const n = Math.floor((h + l - 7 * m + 114) / 31);
-    const o = ((h + l - 7 * m + 114) % 31) + 1;
-
-    return new Date(year, n - 1, o);
-  }
-
-
-  function isChurchHoliday(){
-    const today = new Date();
-    const easterSunday = calculateEasterSunday(today.getFullYear());
-    for (let i = 0; i < churchHolidays.length; i++){
-      const r = churchHolidays[i]; 
-      const holiday = new Date(easterSunday.getFullYear(),easterSunday.getMonth(), easterSunday.getDate() + r.easterOffset);
-      console.log(holiday);
-      if ( holiday.getDate() == today.getDate() && holiday.getMonth() == today.getMonth())
-        return true; 
-    }
-    return false;
-    
-
-  }
-  function isTodayHoliday() {
-    const today = new Date();
-    const day = today.getDate();
-    const month = today.getMonth();
-    const year = today.getFullYear();
-    let r = fixedHolidays.find(entry => entry.day == day && entry.month == month);
-    if (r !== undefined)
-      return true;
-    return isChurchHoliday();
-    
-      
-    console.log(r);
-      return r!== undefined;
-    
-    
+  return new Date(year, n - 1, o);
 }
 
+function isChurchHoliday() {
+  const today = new Date();
+  const easterSunday = calculateEasterSunday(today.getFullYear());
+  for (let i = 0; i < churchHolidays.length; i++) {
+    const r = churchHolidays[i];
+    const holiday = new Date(
+      easterSunday.getFullYear(),
+      easterSunday.getMonth(),
+      easterSunday.getDate() + r.easterOffset
+    );
+    console.log(holiday);
+    if (
+      holiday.getDate() == today.getDate() &&
+      holiday.getMonth() == today.getMonth()
+    )
+      return true;
+  }
+  return false;
+}
+function isTodayHoliday() {
+  const today = new Date();
+  const day = today.getDate();
+  const month = today.getMonth();
+  const year = today.getFullYear();
+  let r = fixedHolidays.find(
+    (entry) => entry.day == day && entry.month == month
+  );
+  if (r !== undefined) return true;
+  return isChurchHoliday();
 
-
+  console.log(r);
+  return r !== undefined;
+}
 
 function main() {
   const date = new Date();
