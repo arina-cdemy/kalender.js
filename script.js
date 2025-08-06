@@ -105,7 +105,7 @@ function addGreyCell(grid, day) {
 
   newDiv.appendChild(newContent);
   grid.appendChild(newDiv);
-  
+
   newDiv.classList.add("overlap");
 }
 
