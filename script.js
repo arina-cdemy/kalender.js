@@ -131,6 +131,40 @@ function getCalendarGrid() {
   return grid;
 }
 
+
+  const fixedHolidays = [
+    {holidayDate:"01.01.2025", holidayName:"Neujahr"};
+    {holidayDate:"01.05.2025", holidayName:"Tag der Arbeit"};
+    {holidayDate:"03.10.2025", holidayName: "Tag der Deutschen Einheit"};
+    {holidayDate:"25.12.2025", holidayName: "1. Weihnachtstag"};
+    {holidayDate:"26.12.2025", holidayName: "2. Weihnachtstag"};
+    
+  ]
+  
+  function isTodayHoliday(holidayArray) {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() +1).padStart(2, "0");
+    const day = String(today:getDate()).padStart(2, "0");
+    const todayStr = `${day}.${month}.${year}`;
+    const holiday = holidayArray.find(holiday => holiday.holidayDate === todayStr); 
+      return holiday ? holiday.holidayName : false;
+    const holidayName = isTodayHolliday(fixedHollidays);
+    const holidayDate = isTodayHoliday(fixedHollidays);
+    if (holidayName){
+      console.log ("Heute ist ein Feiertag" + holidayDate + holidayName);
+    } else {
+      console.log("Heute ist kein Feiertag")
+    }
+    }
+
+  }
+  
+
+
+
+
+
 function main() {
   const date = new Date();
   console.log(getRestOfPrevMonth(2025, 7));
