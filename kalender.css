@@ -10,7 +10,7 @@ body {
     box-sizing: border-box;
 
 span {
-    background: rgba(216, 226, 231, 0.903);
+  
     font-weight: bold;
 }
 
@@ -23,16 +23,23 @@ span {
     border-radius: 10px;
     margin: 20px auto;
     width: 80%;
+   
 }
 
 .introtext{
-    display: grid;
+    display: grid; 
     position: relative;
-    nav-right: current;
-    text-align: left;
-    border-radius: 8px;
-    padding: 30px;
-    background: rgba(216, 226, 231, 0.7);
+    max: width 100%;
+    max-height: 100%;
+    
+
+
+    border-radius: 10px;
+    padding-right : 50px;
+    text-align: center;
+    text-decoration: wavy;
+    
+    font-size: 20;
 
 }
 
@@ -45,7 +52,7 @@ span {
     align-items: center;
     justify-content: center;
     background-color: rgba(58, 41, 41, 0);
-    padding: 20 px;
+    padding: 50 px;
     border-radius: 10px;
     margin-top: 10px;
     width: 30%;
@@ -67,8 +74,8 @@ span {
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 5px;
     margin: 20px;
-
-    ;
+    
+ 
 }
 .date-grid div  {
     background-color: rgba(123, 164, 177, 0.493);

@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="kalender.css">
   <title>Kalender: 14.07.2024</title>
-  <script language="javascript" type="text/javascript" src="script.js"></script>
+  <script language="javascript" type="text/javascript" src="script.js" defer></script>
 </head>
 
 <body>
@@ -12,8 +12,7 @@
   <div class="seitenkopf">
     <h1>Kalenderblatt vom <span id="kalender-datum">(wird ersetzt)</span></h1>
   </div>
-  <div class="button-container">
-    <button class="heute">Heute</button>
+  
   </div>
   <div class="introtext">
     <p1>
@@ -30,11 +29,11 @@
 
 
   <div class="title">
-     <div class="calendar-container">
+    <div class="calendar-container">
         <div class="calendar-header">
-            <button onclick="prevMonth()">←</button>
-            <span id="monthYear"></span>
-            <button onclick="nextMonth()">→</button>
+          <button class="monthChangeButtons" id="test">←</button>
+          <span id="monthYear">monthplaceholder</span>
+          <button class="monthChangeButtons">→</button>
         </div>
         <div id="calendar"></div>
     </div>

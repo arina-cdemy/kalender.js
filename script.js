@@ -1,6 +1,9 @@
 window.onload = function () {
-  main();
+  main(new Date());
 };
+
+let date = new Date();
+
 function getDateGerman(date) {
   let day = date.getDate();
   let month = date.getMonth() + 1; // weil die Monate mit 0 anfangen
@@ -53,6 +56,20 @@ function daysInMonth(year, month) {
       return -1;
   }
 }
+
+document.getElementsByClassName("monthChangeButtons")[0].addEventListener("click", () => {
+  changeDateByOneMonth()
+})
+document.getElementsByClassName("monthChangeButtons")[1].addEventListener("click", () => {
+  changeDateByOneMonth()
+})
+
+function changeDateByOneMonth (){
+  date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+  main(date);
+}
+
+
 
 function getRestOfPrevMonth(year, month) {
   let date = new Date(year, month, 1);
@@ -219,7 +236,6 @@ function weekOfTheMonth(date) {
     "sechste",
     "siebte",
   ];
-
   // Check the next day of the week and if it' on the same month, if not, respond with "Last"
   const nextWeekDay = new Date(date.getTime() + 1000 * 60 * 60 * 24 * 7);
   if (nextWeekDay.getMonth() !== date.getMonth()) {
@@ -234,14 +250,18 @@ for (let i = 0; i < days.length; i += 1) {
   console.log(d, weekOfTheMonth(d));
 }
 
-function main() {
-  const date = new Date();
+
+
+
+function main(date) {
+
   console.log(getRestOfPrevMonth(2025, 7));
   console.log(getOverlappingDaysOfNextMonth(2025, 7));
   getCalendarGrid();
   createCalendar(date);
   weekOfTheMonth(date);
   isTodayHoliday();
+
 
   document.getElementById("holidayCheck").textContent = isTodayHoliday()
     ? "ein Feiertag"
