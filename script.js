@@ -57,12 +57,8 @@ function daysInMonth(year, month) {
   }
 }
 
-document.getElementsByClassName("monthChangeButtons")[0].addEventListener("click", () => {
-  changeDateByOneMonth()
-})
-document.getElementsByClassName("monthChangeButtons")[1].addEventListener("click", () => {
-  changeDateByOneMonth()
-})
+
+//document.getElementById("monthYear") = date.getMonth();
 
 function changeDateByOneMonth (){
   date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
