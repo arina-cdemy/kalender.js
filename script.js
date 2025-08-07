@@ -92,11 +92,10 @@ function createCalendar(date) {
       let day = new Date(year, month, i - daysOfMonth);
       console.log("Adding grey", i - daysOfMonth);
       addGreyCell(grid, day);
-    } else if (i -prevMonthOverlap +1 === day) {
+    } else if (i - prevMonthOverlap + 1 === day) {
       console.log("Adding today");
       addCurrentDateCell(grid, day);
-    }
-    else {
+    } else {
       let day = new Date(year, month, i - prevMonthOverlap + 1);
       console.log("Adding normal", i - prevMonthOverlap + 1);
       addNormalCell(grid, day);
@@ -121,21 +120,16 @@ function addNormalCell(grid, day) {
   grid.appendChild(newDiv);
 }
 
-function addCurrentDateCell(grid,day) {
+function addCurrentDateCell(grid, day) {
   console.log("Today");
   let newDiv = document.createElement("div");
-  newDiv.classList.add('today');
+  newDiv.classList.add("today");
   let newContent = document.createTextNode(day);
   newDiv.appendChild(newContent);
   grid.appendChild(newDiv);
- 
- }
-  
-
-
+}
 
 function getCalendarGrid() {
-
   let grid = document.querySelector(".date-grid");
   if (!grid) {
     alert("Grid is not found2");
@@ -206,40 +200,39 @@ function isTodayHoliday() {
   let r = fixedHolidays.find(
     (entry) => entry.day == day && entry.month == month
   );
-  
+
   if (r !== undefined) return true;
   return isChurchHoliday();
 }
- 
 
+function weekOfTheMonth(date) {
+  const day = date.getDate();
+  const weekDay = date.getDay();
+  let week = Math.ceil(day / 7);
 
-  function weekOfTheMonth(date) {
-  const day = date.getDate()
-  const weekDay = date.getDay()
-  let week = Math.ceil(day / 7)
-  
-  const ordinal = ['erste', 'zweite', 'dritte', 'vierte', 'fünfte', 'sechste', 'siebte']
+  const ordinal = [
+    "erste",
+    "zweite",
+    "dritte",
+    "vierte",
+    "fünfte",
+    "sechste",
+    "siebte",
+  ];
 
   // Check the next day of the week and if it' on the same month, if not, respond with "Last"
-  const nextWeekDay = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 7))
+  const nextWeekDay = new Date(date.getTime() + 1000 * 60 * 60 * 24 * 7);
   if (nextWeekDay.getMonth() !== date.getMonth()) {
-    week = 5
+    week = 5;
   }
-  return `${ordinal[week - 1]}`
+  return `${ordinal[week - 1]}`;
+}
+const days = [new Date("2021-05-14"), new Date("26 July 2010")];
 
-  }
-  const days = [
-  new Date('2021-05-14'),
-  new Date('26 July 2010'),
-  ]
-
-  for (let i = 0; i < days.length; i += 1) {
-  const d = days[i]
-  console.log(d, weekOfTheMonth(d))
-  }   
-
-
-
+for (let i = 0; i < days.length; i += 1) {
+  const d = days[i];
+  console.log(d, weekOfTheMonth(d));
+}
 
 function main() {
   const date = new Date();
@@ -249,25 +242,23 @@ function main() {
   createCalendar(date);
   weekOfTheMonth(date);
   isTodayHoliday();
-  
 
-
-  document.getElementById('holidayCheck').textContent = isTodayHoliday() ? 'ein Feiertag' : 'kein Feiertag';
-  document.getElementById('feld1').textContent = weekOfTheMonth(date);
-
+  document.getElementById("holidayCheck").textContent = isTodayHoliday()
+    ? "ein Feiertag"
+    : "kein Feiertag";
+  document.getElementById("feld1").textContent = weekOfTheMonth(date);
 
   isChurchHoliday();
   console.log(calculateEasterSunday(date.getFullYear()));
 
   document.getElementById("kalender-datum").innerText = getDateGerman(date);
-  
- 
+
   document.getElementById("aktuelles-datum").textContent = getDateGerman(date);
- 
+
   let wochentagGerman = getWeekdayGerman(date.getDay());
   document.getElementById("wochentag1").innerText = wochentagGerman;
   document.getElementById("wochentag2").innerText = wochentagGerman;
-  
+
   const monat1Elem = document.getElementById("monat1");
   if (monat1Elem) {
     const monate = [
@@ -287,15 +278,7 @@ function main() {
     monat1Elem.innerText = monate[date.getMonth()];
   }
 
-    
   document.getElementById("datum1").innerText = getDateGerman(date);
-  
-   document.getElementById("jahr").innerText = date.getFullYear();
-  
-  
 
-  
-
-
-
+  document.getElementById("jahr").innerText = date.getFullYear();
 }
