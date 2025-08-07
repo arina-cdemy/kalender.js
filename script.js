@@ -67,6 +67,7 @@ function getOverlappingDaysOfNextMonth(year, month) {
 
 function createCalendar(date) {
   let grid = getCalendarGrid();
+  let day = date.getDate();
   let year = date.getFullYear();
   let month = date.getMonth();
   let prevMonthOverlap = getRestOfPrevMonth(year, month);
@@ -91,7 +92,11 @@ function createCalendar(date) {
       let day = new Date(year, month, i - daysOfMonth);
       console.log("Adding grey", i - daysOfMonth);
       addGreyCell(grid, day);
-    } else {
+    } else if (i -prevMonthOverlap +1 === day) {
+      console.log("Adding today");
+      addCurrentDateCell(grid, day);
+    }
+    else {
       let day = new Date(year, month, i - prevMonthOverlap + 1);
       console.log("Adding normal", i - prevMonthOverlap + 1);
       addNormalCell(grid, day);
@@ -115,6 +120,19 @@ function addNormalCell(grid, day) {
   newDiv.appendChild(newContent);
   grid.appendChild(newDiv);
 }
+
+function addCurrentDateCell(grid,day) {
+  console.log("Today");
+  let newDiv = document.createElement("div");
+  newDiv.classList.add('today');
+  let newContent = document.createTextNode(day);
+  newDiv.appendChild(newContent);
+  grid.appendChild(newDiv);
+ 
+ }
+  
+
+
 
 function getCalendarGrid() {
 
@@ -193,16 +211,6 @@ function isTodayHoliday() {
   return isChurchHoliday();
 }
  
-function addTodayCell(){
-  let newDiv = document.createElement("div");
-  let newContent = document.createTextNode(day.getDate());
-
-  newDiv.appendChild(newContent);
-  grid.appendChild(newDiv);
-  
-  newDiv.classList.add("today");
-}
-
 
 
   function weekOfTheMonth(date) {
@@ -229,6 +237,7 @@ function addTodayCell(){
   const d = days[i]
   console.log(d, weekOfTheMonth(d))
   }   
+
 
 
 
