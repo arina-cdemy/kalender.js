@@ -117,16 +117,7 @@ function addNormalCell(grid, day) {
 }
 
 function getCalendarGrid() {
-  /*let grid = document.getElementsByClassName("date-grid");
-  if (!grid) {
-    alert("Grid is not found");
-    return null;
-  }
-  for (var i = 0, len = grid.length; i < len; i++) {
-    grid[i].remove();
-  }
-  console.log(grid);
-*/
+
   let grid = document.querySelector(".date-grid");
   if (!grid) {
     alert("Grid is not found2");
@@ -143,7 +134,6 @@ const fixedHolidays = [
   { day: 1, month: 9, holidayName: "Tag der Deutschen Einheit" },
   { day: 25, month: 11, holidayName: "1. Weihnachtstag" },
   { day: 26, month: 11, holidayName: "2. Weihnachtstag" },
-
   { day: 6, month: 7, holidayName: "Andres Geburtstag" },
 ];
 
@@ -200,10 +190,19 @@ function isTodayHoliday() {
   );
   if (r !== undefined) return true;
   return isChurchHoliday();
-
-  console.log(r);
-  return r !== undefined;
+  
 }
+
+function whichWeekday(date) {
+  date = new Date();
+  const today = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  const x = getOverlappingDaysOfNextMonth();
+  const y = getRestOfPrevMonth();
+
+}
+
 
 function main() {
   const date = new Date();
@@ -211,26 +210,24 @@ function main() {
   console.log(getOverlappingDaysOfNextMonth(2025, 7));
   getCalendarGrid();
   createCalendar(date);
-  isTodayHoliday();
+  whichWeekday(date)
+  isTodayHoliday()
+  document.getElementById('holidayCheck').textContent = isTodayHoliday() ? 'ein Feiertag' : 'kein Feiertag';
+
+
+
   isChurchHoliday();
   console.log(calculateEasterSunday(date.getFullYear()));
 
   document.getElementById("kalender-datum").innerText = getDateGerman(date);
-
-  const aktuellesDatumElem = document.getElementById("aktuelles-datum");
-  if (aktuellesDatumElem) {
-    aktuellesDatumElem.textContent = getDateGerman(date);
-  }
-
-  const wochentag1Elem = document.getElementById("wochentag1");
+  
+ 
+  document.getElementById("aktuelles-datum").textContent = getDateGerman(date);
+ 
   let wochentagGerman = getWeekdayGerman(date.getDay());
-  if (wochentag1Elem) {
-    wochentag1Elem.innerText = wochentagGerman;
-  }
-  const wochentag2Elem = document.getElementById("wochentag2");
-  if (wochentag2Elem) {
-    wochentag2Elem.innerText = wochentagGerman;
-  }
+  document.getElementById("wochentag1").innerText = wochentagGerman;
+  document.getElementById("wochentag2").innerText = wochentagGerman;
+  
   const monat1Elem = document.getElementById("monat1");
   if (monat1Elem) {
     const monate = [
@@ -250,12 +247,15 @@ function main() {
     monat1Elem.innerText = monate[date.getMonth()];
   }
 
-  const datum1Elem = document.getElementById("datum1");
-  if (datum1Elem) {
-    datum1Elem.innerText = getDateGerman(date);
-  }
-  const jahrElem = document.getElementById("jahr");
-  if (jahrElem) {
-    jahrElem.innerText = date.getFullYear();
-  }
+    
+  document.getElementById("datum1").innerText = getDateGerman(date);
+  
+   document.getElementById("jahr").innerText = date.getFullYear();
+  
+  
+
+  
+
+
+
 }

@@ -17,25 +17,34 @@
   </div>
   <div class="introtext">
     <p1>
-      Der <span id="aktuelles-datum">(wird ersetzt)</span> 
-      ist ein <span id="wochentag1">(wird ersetzt)</span>  
-      und zwar der <span id = "feld1">wird ersetzt</span> <span id="wochentag2">(wird ersetzt)</span> 
-      im <span id="monat1">(wird ersetzt)</span> des Jahres 
-      <span id="jahr">(wird ersetzt)</span>. 
-      <span id="datum1">(wird ersetzt)</span> 
-      ist kein Feiertag in Deutschland.
+      Der <span id="aktuelles-datum">unknown</span> 
+      ist ein <span id="wochentag1">unknown</span>  
+      und zwar der <span id = "feld1">unknown</span> <span id="wochentag2">unknown</span> 
+      im <span id="monat1">unknown</span> des Jahres 
+      <span id="jahr">unknown</span>. 
+      <span id="datum1">unknown</span> 
+      ist <span id = "holidayCheck">unknown</span> in Deutschland.
       
     </p1>
   </div>
 
 
   <div class="title">
-    <h2>Juli 2025</h2>
+     <div class="calendar-container">
+        <div class="calendar-header">
+            <button onclick="prevMonth()">←</button>
+            <span id="monthYear"></span>
+            <button onclick="nextMonth()">→</button>
+        </div>
+        <div id="calendar"></div>
+    </div>
+
+    </div>
+  
   </div>
 
   <div class="calendar">
 
-    <div class="month-indicator"></div>
     
     <div class="day-of-week">
       

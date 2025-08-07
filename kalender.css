@@ -26,7 +26,7 @@ span {
 }
 
 .introtext{
-    display: block;
+    display: grid;
     position: relative;
     nav-right: current;
     text-align: left;
@@ -52,7 +52,7 @@ span {
 
 }   
 .overlap {
-    color: coral
+    color: rgb(238, 164, 137)
 }
 .date-grid, .day-of-week {
     display: grid;
