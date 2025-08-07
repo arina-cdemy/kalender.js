@@ -53,6 +53,11 @@ span {
 }   
 .overlap {
     color: rgb(238, 164, 137)
+
+}
+
+.today{
+    border-color: aqua;
 }
 .date-grid, .day-of-week {
     display: grid;

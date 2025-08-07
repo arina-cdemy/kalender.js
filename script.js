@@ -134,7 +134,7 @@ const fixedHolidays = [
   { day: 1, month: 9, holidayName: "Tag der Deutschen Einheit" },
   { day: 25, month: 11, holidayName: "1. Weihnachtstag" },
   { day: 26, month: 11, holidayName: "2. Weihnachtstag" },
-  { day: 6, month: 7, holidayName: "Andres Geburtstag" },
+  { day: 7, month: 7, holidayName: "Andres Geburtstag" },
 ];
 
 const churchHolidays = [
@@ -188,20 +188,48 @@ function isTodayHoliday() {
   let r = fixedHolidays.find(
     (entry) => entry.day == day && entry.month == month
   );
+  
   if (r !== undefined) return true;
   return isChurchHoliday();
+}
+ 
+function addTodayCell(){
+  let newDiv = document.createElement("div");
+  let newContent = document.createTextNode(day.getDate());
+
+  newDiv.appendChild(newContent);
+  grid.appendChild(newDiv);
   
+  newDiv.classList.add("today");
 }
 
-function whichWeekday(date) {
-  date = new Date();
-  const today = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-  const x = getOverlappingDaysOfNextMonth();
-  const y = getRestOfPrevMonth();
 
-}
+
+  function weekOfTheMonth(date) {
+  const day = date.getDate()
+  const weekDay = date.getDay()
+  let week = Math.ceil(day / 7)
+  
+  const ordinal = ['erste', 'zweite', 'dritte', 'vierte', 'fünfte', 'sechste', 'siebte']
+
+  // Check the next day of the week and if it' on the same month, if not, respond with "Last"
+  const nextWeekDay = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 7))
+  if (nextWeekDay.getMonth() !== date.getMonth()) {
+    week = 5
+  }
+  return `${ordinal[week - 1]}`
+
+  }
+  const days = [
+  new Date('2021-05-14'),
+  new Date('26 July 2010'),
+  ]
+
+  for (let i = 0; i < days.length; i += 1) {
+  const d = days[i]
+  console.log(d, weekOfTheMonth(d))
+  }   
+
 
 
 function main() {
@@ -210,10 +238,13 @@ function main() {
   console.log(getOverlappingDaysOfNextMonth(2025, 7));
   getCalendarGrid();
   createCalendar(date);
-  whichWeekday(date)
-  isTodayHoliday()
-  document.getElementById('holidayCheck').textContent = isTodayHoliday() ? 'ein Feiertag' : 'kein Feiertag';
+  weekOfTheMonth(date);
+  isTodayHoliday();
+  
 
+
+  document.getElementById('holidayCheck').textContent = isTodayHoliday() ? 'ein Feiertag' : 'kein Feiertag';
+  document.getElementById('feld1').textContent = weekOfTheMonth(date);
 
 
   isChurchHoliday();
