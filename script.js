@@ -4,6 +4,19 @@ window.onload = function () {
 
 let date = new Date();
 
+/*function changeDateByOneMonth (){
+let date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+return 
+}
+
+  document.getElementsByClassName("monthChangeButtons")[0].addEventListener("click", () => {
+  changeDateByOneMonth();
+})
+document.getElementsByClassName("monthChangeButtons")[1].addEventListener("click", () => {
+  changeDateByOneMonth();
+})
+*/
+
 function getDateGerman(date) {
   let day = date.getDate();
   let month = date.getMonth() + 1; // weil die Monate mit 0 anfangen
@@ -57,16 +70,6 @@ function daysInMonth(year, month) {
   }
 }
 
-
-//document.getElementById("monthYear") = date.getMonth();
-
-function changeDateByOneMonth (){
-  date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-  main(date);
-}
-
-
-
 function getRestOfPrevMonth(year, month) {
   let date = new Date(year, month, 1);
   return (date.getDay() + 6) % 7;
@@ -78,7 +81,8 @@ function getOverlappingDaysOfNextMonth(year, month) {
   return 6 - ((date.getDay() + 6) % 7);
 }
 
-function createCalendar(date) {
+function createCalendar() {
+  let date = new Date();
   let grid = getCalendarGrid();
   let day = date.getDate();
   let year = date.getFullYear();
@@ -218,7 +222,8 @@ function isTodayHoliday() {
   return isChurchHoliday();
 }
 
-function weekOfTheMonth(date) {
+function weekOfTheMonth() {
+  let date = new Date();
   const day = date.getDate();
   const weekDay = date.getDay();
   let week = Math.ceil(day / 7);
@@ -246,18 +251,13 @@ for (let i = 0; i < days.length; i += 1) {
   console.log(d, weekOfTheMonth(d));
 }
 
-
-
-
-function main(date) {
-
+function main() {
   console.log(getRestOfPrevMonth(2025, 7));
   console.log(getOverlappingDaysOfNextMonth(2025, 7));
   getCalendarGrid();
   createCalendar(date);
   weekOfTheMonth(date);
   isTodayHoliday();
-
 
   document.getElementById("holidayCheck").textContent = isTodayHoliday()
     ? "ein Feiertag"
