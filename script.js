@@ -1,23 +1,29 @@
+
+const today = new Date();
+let currentDate = today;
+
 window.onload = function () {
-  main();
+  main(currentDate);
+
+
+
 };
 
-let date = new Date();
+function updateCalendar (date){
+  getCalendarGrid();
+  createCalendar(date);
+  updateHolidayText(date);
+  updateWeekdayNumberText(date);
+  updateFormattedDateText (date);
+  updateWeekdayText(date);
+  updateCurrentDateInGermanText(date);
 
-/*function changeDateByOneMonth (){
-let date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-return 
+
 }
 
-  document.getElementsByClassName("monthChangeButtons")[0].addEventListener("click", () => {
-  changeDateByOneMonth();
-})
-document.getElementsByClassName("monthChangeButtons")[1].addEventListener("click", () => {
-  changeDateByOneMonth();
-})
-*/
 
-function getDateGerman(date) {
+
+function getFormattedDate (date) {
   let day = date.getDate();
   let month = date.getMonth() + 1; // weil die Monate mit 0 anfangen
   let year = date.getFullYear();
@@ -30,7 +36,7 @@ function getDateGerman(date) {
   return `${day}.${month}.${year}`;
 }
 
-function getWeekdayGerman(weekday) {
+function getGermanWeekday(weekday) {
   if (weekday == 0) {
     return "Sonntag";
   } else if (weekday == 1) {
@@ -81,8 +87,8 @@ function getOverlappingDaysOfNextMonth(year, month) {
   return 6 - ((date.getDay() + 6) % 7);
 }
 
-function createCalendar() {
-  let date = new Date();
+function createCalendar(date) {
+
   let grid = getCalendarGrid();
   let day = date.getDate();
   let year = date.getFullYear();
@@ -101,20 +107,22 @@ function createCalendar() {
   );
   for (let i = 0; i < ncells; i++) {
     if (i < prevMonthOverlap) {
-      let day = new Date(year, month, prevMonthDays - prevMonthOverlap + 1 + i);
-      console.log("Adding grey", prevMonthDays - prevMonthOverlap + 1 + i);
+      let day = new Date(year, month-1, prevMonthDays - prevMonthOverlap + 1 + i);
+      console.log("Adding grey prev month ", prevMonthDays - prevMonthOverlap + 1 + i);
+      console.log("This year" + year);
+      console.log(day);
       addGreyCell(grid, day);
-    } else if (i - prevMonthOverlap > daysOfMonth) {
-      console.log("Here ", i, daysOfMonth);
-      let day = new Date(year, month, i - daysOfMonth);
-      console.log("Adding grey", i - daysOfMonth);
+    } else if (i - prevMonthOverlap >= daysOfMonth) {
+      const dayNumberNext = i - prevMonthOverlap - daysOfMonth + 1;
+      let day = new Date(year, month, dayNumberNext);
+      console.log("Adding grey next month", i - daysOfMonth);
       addGreyCell(grid, day);
     } else if (i - prevMonthOverlap + 1 === day) {
       console.log("Adding today");
       addCurrentDateCell(grid, day);
     } else {
       let day = new Date(year, month, i - prevMonthOverlap + 1);
-      console.log("Adding normal", i - prevMonthOverlap + 1);
+      console.log("Adding normal day", i - prevMonthOverlap + 1);
       addNormalCell(grid, day);
     }
   }
@@ -190,9 +198,8 @@ function calculateEasterSunday(year) {
   return new Date(year, n - 1, o);
 }
 
-function isChurchHoliday() {
-  const today = new Date();
-  const easterSunday = calculateEasterSunday(today.getFullYear());
+function isChurchHoliday(date) {
+  const easterSunday = calculateEasterSunday(date.getFullYear());
   for (let i = 0; i < churchHolidays.length; i++) {
     const r = churchHolidays[i];
     const holiday = new Date(
@@ -202,30 +209,26 @@ function isChurchHoliday() {
     );
     console.log(holiday);
     if (
-      holiday.getDate() == today.getDate() &&
-      holiday.getMonth() == today.getMonth()
+      holiday.getDate() == date.getDate() &&
+      holiday.getMonth() == date.getMonth()
     )
       return true;
   }
   return false;
 }
-function isTodayHoliday() {
-  const today = new Date();
-  const day = today.getDate();
-  const month = today.getMonth();
-  const year = today.getFullYear();
+function isDateHoliday(date) {
+  const day = date.getDate();
+  const month = date.getMonth();
   let r = fixedHolidays.find(
     (entry) => entry.day == day && entry.month == month
   );
 
   if (r !== undefined) return true;
-  return isChurchHoliday();
+  return isChurchHoliday(date);
 }
 
-function weekOfTheMonth() {
-  let date = new Date();
+function weekOfTheMonth(date) {
   const day = date.getDate();
-  const weekDay = date.getDay();
   let week = Math.ceil(day / 7);
 
   const ordinal = [
@@ -244,38 +247,42 @@ function weekOfTheMonth() {
   }
   return `${ordinal[week - 1]}`;
 }
-const days = [new Date("2021-05-14"), new Date("26 July 2010")];
 
-for (let i = 0; i < days.length; i += 1) {
-  const d = days[i];
-  console.log(d, weekOfTheMonth(d));
-}
-
-function main() {
-  console.log(getRestOfPrevMonth(2025, 7));
-  console.log(getOverlappingDaysOfNextMonth(2025, 7));
-  getCalendarGrid();
-  createCalendar(date);
-  weekOfTheMonth(date);
-  isTodayHoliday();
-
-  document.getElementById("holidayCheck").textContent = isTodayHoliday()
-    ? "ein Feiertag"
-    : "kein Feiertag";
+function updateWeekdayNumberText(date) {
+  
   document.getElementById("feld1").textContent = weekOfTheMonth(date);
 
-  isChurchHoliday();
-  console.log(calculateEasterSunday(date.getFullYear()));
+}
 
-  document.getElementById("kalender-datum").innerText = getDateGerman(date);
+//for (let i = 0; i < days.length; i += 1) {
+  //const d = days[i];
+//  console.log(d, weekOfTheMonth(d));
 
-  document.getElementById("aktuelles-datum").textContent = getDateGerman(date);
 
-  let wochentagGerman = getWeekdayGerman(date.getDay());
+function updateHolidayText(date) {
+   document.getElementById("holidayCheck").textContent = isDateHoliday(date)
+    ? "ein Feiertag"
+    : "kein Feiertag";
+}
+
+function updateFormattedDateText (date){
+
+  document.getElementById("kalender-datum").innerText = getFormattedDate(date);
+  document.getElementById("aktuelles-datum").textContent = getFormattedDate(date);
+
+
+}
+
+function updateWeekdayText(date){
+  
+
+  let wochentagGerman = getGermanWeekday(date.getDay());
   document.getElementById("wochentag1").innerText = wochentagGerman;
   document.getElementById("wochentag2").innerText = wochentagGerman;
+}
 
-  const monat1Elem = document.getElementById("monat1");
+function updateCurrentDateInGermanText(date) {
+    const monat1Elem = document.getElementById("monat1");
   if (monat1Elem) {
     const monate = [
       "Januar",
@@ -293,8 +300,32 @@ function main() {
     ];
     monat1Elem.innerText = monate[date.getMonth()];
   }
-
-  document.getElementById("datum1").innerText = getDateGerman(date);
-
+  document.getElementById("datum1").innerText = getFormattedDate(date);
   document.getElementById("jahr").innerText = date.getFullYear();
+}
+
+
+function main(date) {
+  console.log(getRestOfPrevMonth(2025, 7));
+  console.log(getOverlappingDaysOfNextMonth(2025, 7));
+
+  getCalendarGrid();
+  createCalendar(date);
+  updateHolidayText(date);
+  updateWeekdayNumberText(date);
+  updateFormattedDateText (date);
+  updateWeekdayText(date);
+  updateCurrentDateInGermanText(date);
+
+  document.getElementsByClassName("monthChangeButtons")[0].addEventListener( "click",  () => {
+  currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() -1, today.getDate());
+  updateCalendar(currentDate);
+  console.log("click -1");
+})
+  document.getElementsByClassName("monthChangeButtons")[1].addEventListener( "click", () => {
+  currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() +1, today.getDate());
+  updateCalendar(currentDate);
+  console.log("click +1");
+  })
+
 }
