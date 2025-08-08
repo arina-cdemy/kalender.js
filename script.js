@@ -1,5 +1,5 @@
 window.onload = function () {
-  main(new Date());
+  main();
 };
 
 let date = new Date();
