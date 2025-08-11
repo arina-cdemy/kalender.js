@@ -23,7 +23,7 @@ span {
     border-radius: 10px;
     margin: 20px auto;
     width: 80%;
-   
+
 }
 
 .introtext{
@@ -31,15 +31,13 @@ span {
     position: relative;
     max: width 100%;
     max-height: 100%;
-    
-
-
     border-radius: 10px;
     padding-right : 50px;
-    text-align: center;
+    text-align: right;
     text-decoration: wavy;
-    
+    padding: 20px 30px;
     font-size: 20;
+    grid-template-columns: repeat(2, 1fr);
 
 }
 
@@ -58,8 +56,31 @@ span {
     width: 30%;
 
 }   
+.saturday {
+   color:hotpink;
+}
+
+.sunday{
+    color:blueviolet
+}
+.monthChangeButtons {
+ background-color: #518f9e; 
+  border: none;
+  color: white;
+  padding: 5px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 10px;
+  
+
+    
+
+
+}
 .overlap {
-    color: rgb(238, 164, 137)
+    color: rgb(49, 33, 28)
 
 }
 
