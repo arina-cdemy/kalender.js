@@ -85,46 +85,85 @@ function createCalendar(date) {
   let day = date.getDate();
   let year = date.getFullYear();
   let month = date.getMonth();
-  let prevMonthOverlap = getRestOfPrevMonth(year, month);
-  let prevMonthDays = daysInMonth(year, month - 1);
-  console.log("prevMonthDays == ", prevMonthDays);
-  let daysOfMonth = daysInMonth(year, month);
-  let nextMonthOverlap = getOverlappingDaysOfNextMonth(year, month);
-  let ncells = prevMonthOverlap + daysOfMonth + nextMonthOverlap;
-  console.log("ncells == ", ncells);
-  console.log("In blah ", prevMonthOverlap, daysOfMonth, nextMonthOverlap);
-  for (let i = 0; i < ncells; i++) {
-    if (i < prevMonthOverlap) {
-      let day = new Date(
-        year,
-        month - 1,
-        prevMonthDays - prevMonthOverlap + 1 + i
-      );
-      console.log("Adding grey prev month ", day);
-      addGreyCell(grid, day);
-    } else if (i - prevMonthOverlap >= daysOfMonth) {
-      const dayNumberNext = i - prevMonthOverlap - daysOfMonth + 1;
-      let day = new Date(year, month, dayNumberNext);
-      console.log("Adding grey next month", day);
-      addGreyCell(grid, day);
-    } else if (i - prevMonthOverlap + 1 === day) {
-      console.log("Adding today");
-      addCurrentDateCell(grid, day);
-    } else {
-      let day = new Date(year, month, i - prevMonthOverlap + 1);
-      console.log("Adding normal day", i - prevMonthOverlap + 1);
-      addNormalCell(grid, day);
+  let calendarFirst = new Date(
+    year,
+    month,
+    1 - getRestOfPrevMonth(year, month)
+  );
+  console.log("calendarFirst: ", calendarFirst);
+  let monthLast = new Date(year, month + 1, 0);
+  let calendarLast = new Date(
+    year,
+    month,
+    monthLast.getDate() + getOverlappingDaysOfNextMonth(year, month)
+  );
+  console.log("calendarLast: ", calendarLast);
+  for (
+    let d = calendarFirst;
+    d <= calendarLast;
+    d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1)
+  ) {
+    console.log(d);
+    let cell = document.createElement("div");
+    cell.textContent = d.getDate();
+    if (d.getMonth() !== month) {
+      markAsOtherMonth(cell);
     }
+    if (areDatesEqual(d, date)) {
+      cell.classList.add("today");
+    }
+    if (isDateHoliday(d)) {
+      cell.classList.add("holiday");
+    }
+    if (d.getDay() === 6) {
+      cell.classList.add("saturday");
+    } else if (d.getDay() === 0) {
+      cell.classList.add("sunday");
+    }
+    grid.appendChild(cell);
   }
+
+  // let prevMonthOverlap = getRestOfPrevMonth(year, month);
+  // let prevMonthDays = daysInMonth(year, month - 1);
+  // console.log("prevMonthDays == ", prevMonthDays);
+  // let daysOfMonth = daysInMonth(year, month);
+  // let nextMonthOverlap = getOverlappingDaysOfNextMonth(year, month);
+  // let ncells = prevMonthOverlap + daysOfMonth + nextMonthOverlap;
+  // console.log("ncells == ", ncells);
+  // console.log("In blah ", prevMonthOverlap, daysOfMonth, nextMonthOverlap);
+  // for (let i = 0; i < ncells; i++) {
+  //   if (i < prevMonthOverlap) {
+  //     let day = new Date(
+  //       year,
+  //       month - 1,
+  //       prevMonthDays - prevMonthOverlap + 1 + i
+  //     );
+  //     console.log("Adding grey prev month ", day);
+  //     addGreyCell(grid, day);
+  //   } else if (i - prevMonthOverlap >= daysOfMonth) {
+  //     const dayNumberNext = i - prevMonthOverlap - daysOfMonth + 1;
+  //     let day = new Date(year, month, dayNumberNext);
+  //     console.log("Adding grey next month", day);
+  //     addGreyCell(grid, day);
+  //   } else if (i - prevMonthOverlap + 1 === day) {
+  //     console.log("Adding today");
+  //     addCurrentDateCell(grid, day);
+  //   } else {
+  //     let day = new Date(year, month, i - prevMonthOverlap + 1);
+  //     console.log("Adding normal day", i - prevMonthOverlap + 1);
+  //     addNormalCell(grid, day);
+  //   }
+  // }
 }
 
-function addGreyCell(grid, day) {
-  let newDiv = document.createElement("div");
-  let newContent = document.createTextNode(day.getDate());
+function areDatesEqual(datum1, datum2) {
+  if (datum1.getFullYear() !== datum2.getFullYear()) return false;
+  if (datum1.getMonth() !== datum2.getMonth()) return false;
+  if (datum1.getDate() !== datum2.getDate()) return false;
+  return true;
+}
 
-  newDiv.appendChild(newContent);
-  grid.appendChild(newDiv);
-
+function markAsOtherMonth(newDiv) {
   newDiv.classList.add("overlap");
 }
 
@@ -139,7 +178,7 @@ function addCurrentDateCell(grid, day) {
   console.log("Today");
   let newDiv = document.createElement("div");
   newDiv.classList.add("today");
-  let newContent = document.createTextNode(day);
+  let newContent = document.createTextNode(day.getDate());
   newDiv.appendChild(newContent);
   grid.appendChild(newDiv);
 }
