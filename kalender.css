@@ -29,15 +29,15 @@ span {
 .introtext{
     display: grid; 
     position: relative;
-    max: width 100%;
     max-height: 100%;
     border-radius: 10px;
-    padding-right : 50px;
+    padding-right : 100px;
     text-align: right;
     text-decoration: wavy;
-    padding: 20px 30px;
+    padding: 150px 100px;
     font-size: 20;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2);
+    
 
 }
 
@@ -52,8 +52,10 @@ span {
     background-color: rgba(58, 41, 41, 0);
     padding: 50 px;
     border-radius: 10px;
-    margin-top: 10px;
+    margin-top: 30px;
     width: 30%;
+    
+
 
 }   
 .saturday {
@@ -64,16 +66,20 @@ span {
     color:blueviolet
 }
 .monthChangeButtons {
- background-color: #518f9e; 
+
+  background-color: #7fc0da; /* Green */
   border: none;
   color: white;
-  padding: 5px 40px;
+  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
-  border-radius: 10px;
-  
+  font-size: 16px;
+  border: 10px;
+  border-radius: 20px
+  margin: 10%;
+}
+
 
     
 
