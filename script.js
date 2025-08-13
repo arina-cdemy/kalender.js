@@ -1,6 +1,19 @@
 const today = new Date();
 let currentDate = today;
-
+const monate = [
+  "Januar",
+  "Februar",
+  "März",
+  "April",
+  "Mai",
+  "Juni",
+  "Juli",
+  "August",
+  "September",
+  "Oktober",
+  "November",
+  "Dezember",
+];
 window.onload = function () {
   main(currentDate);
 };
@@ -306,20 +319,6 @@ function updateWeekdayText(date) {
 function updateCurrentDateInGermanText(date) {
   const monat1Elem = document.getElementById("monat1");
   if (monat1Elem) {
-    const monate = [
-      "Januar",
-      "Februar",
-      "März",
-      "April",
-      "Mai",
-      "Juni",
-      "Juli",
-      "August",
-      "September",
-      "Oktober",
-      "November",
-      "Dezember",
-    ];
     monat1Elem.innerText = monate[date.getMonth()];
   }
   document.getElementById("datum1").innerText = getFormattedDate(date);
@@ -327,7 +326,6 @@ function updateCurrentDateInGermanText(date) {
 }
 
 async function getData(month, day) {
-  
   const url = `https://history.muffinlabs.com/date/${month}/${day}`;
   try {
     const response = await fetch(url);
@@ -344,32 +342,34 @@ async function getData(month, day) {
 
 async function updateHistoryList(date) {
   let month = date.getMonth() + 1;
-  let day = date.getDate(); 
-  let response = await getData(month, day); 
+  let day = date.getDate();
+  let response = await getData(month, day);
   console.log(response.data.Events);
   let list = getHistoryEventsList();
   list[0].innerHTML = "";
-  for (let i = 0; i<5; i++){
+  for (let i = 0; i < 5; i++) {
     let event = response.data.Events[i];
     let li = document.createElement("li");
     li.classList.add("list-item");
     li.innerHTML = `${event.year}: ${event.text}`;
     list[0].appendChild(li);
     console.log(event.year, event.text);
-
   }
 }
 
-
-
-function getHistoryEventsList(){
-
-let container = document.querySelector(".list-container");
-console.log(container);
-return container.getElementsByTagName("ul");
-
+function getHistoryEventsList() {
+  let container = document.querySelector(".list-container");
+  console.log(container);
+  return container.getElementsByTagName("ul");
 }
 
+function updateDateHistory(date) {
+  let day = date.getDay();
+  let month = monate[date.getMonth()];
+
+  document.getElementById("data").innerHTML = `${day}. ${month}`;
+  console.log(day, month);
+}
 
 function main(date) {
   createCalendar(date);
@@ -379,6 +379,7 @@ function main(date) {
   updateWeekdayText(date);
   updateCurrentDateInGermanText(date);
   updateHistoryList(date);
+  updateDateHistory(date);
 
   document
     .getElementsByClassName("monthChangeButtons")[0]
