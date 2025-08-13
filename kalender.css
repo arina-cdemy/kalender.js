@@ -68,6 +68,7 @@ span {
 .monthChangeButtons {
 
   background-color: #7fc0da; /* Green */
+  position:relative;
   border: none;
   color: white;
   padding: 15px 32px;
