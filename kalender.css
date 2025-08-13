@@ -10,7 +10,7 @@ body {
     box-sizing: border-box;
 
 span {
-  
+
     font-weight: bold;
 }
 
@@ -42,7 +42,7 @@ span {
 }
 
 .calendar {
-    display: block;
+    display: grid;
     position: relative;
     left: 30;
     display: grid;
@@ -63,26 +63,15 @@ span {
 }
 
 .sunday{
-    color:blueviolet
+    color:blueviolet;
 }
-.monthChangeButtons {
+.monthChangeButtons{
 
-  background-color: #7fc0da; /* Green */
-  position:relative;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border: 10px;
-  border-radius: 20px
-  margin: 10%;
+
+    position:relative;
+    margin-bottom: auto;
+
 }
-
-
-    
 
 
 }
@@ -97,11 +86,13 @@ span {
 
 
 }
-.date-grid, .day-of-week {
+.date-grid, .day-of-week, .title {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 5px;
-    margin: 20px;
+    margin:  10px;
+    margin-bottom: auto;
+    margin-top: 10px;
     
  
 }
@@ -127,6 +118,7 @@ span {
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    color:aqua
 }
 .day-of-week div:hover {
     background-color: rgba(123, 164, 177, 0.693);
@@ -148,18 +140,19 @@ p {
     margin-bottom: 10px;
 } 
 
+
 .list-container {
-    display: block;
-    float:right;
-    flex-direction: column;
-    align-items: left ;
-    justify-content: left;
-    background-color: rgba(58, 41, 41, 0);
+    display: grid;
+    margin-left: 600;
+    position: relative;
+
+
+    align-items: right;
+    justify-content: right;
     padding: 20px;
     border-radius: 10px;
-    margin-top: 20px;
     font-size: large;
-    color: rgba(198, 233, 233, 0.623);
+    color: rgba(240, 243, 243, 0.623);
 }
 
 #überschrift {
@@ -197,7 +190,7 @@ p {
     outline: none;
 }   
 .heute {
-    position: relative;
+    position: absolute;
     text-align: center;
     display: inline-block;
     font-size: 16px;

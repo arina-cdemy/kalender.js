@@ -326,6 +326,51 @@ function updateCurrentDateInGermanText(date) {
   document.getElementById("jahr").innerText = date.getFullYear();
 }
 
+async function getData(month, day) {
+  
+  const url = `https://history.muffinlabs.com/date/${month}/${day}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+async function updateHistoryList(date) {
+  let month = date.getMonth() + 1;
+  let day = date.getDate(); 
+  let response = await getData(month, day); 
+  console.log(response.data.Events);
+  let list = getHistoryEventsList();
+  list[0].innerHTML = "";
+  for (let i = 0; i<5; i++){
+    let event = response.data.Events[i];
+    let li = document.createElement("li");
+    li.classList.add("list-item");
+    li.innerHTML = `${event.year}: ${event.text}`;
+    list[0].appendChild(li);
+    console.log(event.year, event.text);
+
+  }
+}
+
+
+
+function getHistoryEventsList(){
+
+let container = document.querySelector(".list-container");
+console.log(container);
+return container.getElementsByTagName("ul");
+
+}
+
+
 function main(date) {
   createCalendar(date);
   updateHolidayText(date);
@@ -333,6 +378,7 @@ function main(date) {
   updateFormattedDateText(date);
   updateWeekdayText(date);
   updateCurrentDateInGermanText(date);
+  updateHistoryList(date);
 
   document
     .getElementsByClassName("monthChangeButtons")[0]
