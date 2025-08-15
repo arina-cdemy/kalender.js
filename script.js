@@ -122,6 +122,7 @@ function createCalendar(date) {
     cell.textContent = d.getDate();
     if (d.getMonth() !== month) {
       markAsOtherMonth(cell);
+      cell.classList.add("overlap");
     }
     if (areDatesEqual(d, date)) {
       cell.classList.add("today");
@@ -310,7 +311,7 @@ async function getData(month, day) {
 }
 
 function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+  return Math.floor(Math.random() * max); //math for getting a random number of items 
 }
 
 async function updateHistoryList(date) {

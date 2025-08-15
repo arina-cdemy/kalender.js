@@ -1,111 +1,107 @@
 body {  
-    background-image:url(forest-9568429_1280.webp);
+    background-color: #822a76;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     font-family: 'Arial', sans-serif;
-    background-color: rgb(240, 240, 240);
-    color: rgb(34, 34, 34);
-    border: 50px solid rgba(34, 30, 30, 0);
+    background-color: rgb(80, 56, 56);
+    color: rgb(11, 10, 10);
+    border: 20px solid rgba(34, 30, 30, 0);
     box-sizing: border-box;
 
-span {
+}
 
+span {
     font-weight: bold;
 }
 
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(4, 100px);
+}
 
 .seitenkopf {
-    display: grid;
-    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
     background-color: rgba(123, 164, 177, 0);
-    padding: 15px;
+    padding: 10px 20px;
     border-radius: 10px;
-    margin: 20px auto;
-    width: 80%;
+    margin: 5px ;
+
 
 }
 
 .introtext{
-    display: grid; 
-    position: relative;
-    max-height: 100%;
-    border-radius: 10px;
-    padding-right : 100px;
-    text-align: right;
-    text-decoration: wavy;
-    padding: 150px 100px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end:3;
+    margin-left: 5px;
+    border-radius: 0px;
+    padding: 10px 20px;
     font-size: 20;
-    grid-template-columns: repeat(2);
+    
     
 
-}
-
-.calendar {
-    display: grid;
-    position: relative;
-    left: 30;
-    display: grid;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(58, 41, 41, 0);
-    padding: 50 px;
-    border-radius: 10px;
-    margin-top: 30px;
-    width: 30%;
-    
-
-
-}   
-.saturday {
-   color:hotpink;
-}
-
-.sunday{
-    color:blueviolet;
 }
 .monthChangeButtons{
-    display:outside;
-    border:none;
+
+    
+}
+.calendar  {
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 3/3;
+    gap: 10px;
+    width: 100%;
+    left: 20px;
+    justify-content: center;
+    background-color: rgba(249, 244, 244, 0);
+    padding: 0 px;
     border-radius: 10px;
-    background-color: #b9d1e5;
-    text-align: center;
-    font-size: large;
-    color:#4383be;
-    margin-left: 60px;
-    padding: 10px 20px; 
-    position:relative;
-    margin-bottom: auto;
+    margin-top: 0px;
+    
+}
 
+.saturday {
+    color:hotpink;
+}
+.sunday{
+    color:rgb(247, 23, 27);
 }
 
 
-}
 .overlap {
-    color: rgb(49, 33, 28)
+    color: rgb(214, 130, 105)
 
 }
 
 .today{
-    color:#4383be;
-    border: solid rgb(44, 99, 172) 5px;
+    color:#822a76;
+    border: solid rgb(137, 28, 159) 5px;
 
 
 }
-.date-grid, .day-of-week, .title {
+.date-grid, .day-of-week {
+
     display: grid;
+    position: relative;
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 5px;
-    margin:  10px;
-    margin-bottom: auto;
-    margin-top: 10px;
+    margin:  5px;
+    margin-top: 20px;
+    margin-left: 30px;
     
- 
 }
 .date-grid div  {
     background-color: rgba(123, 164, 177, 0.493);
-    padding: 20px;
+    position: relative;
+    border: solid;
+    border-color: #11111100;
+    padding: 20px 30px;
     text-align: center;
     font-weight: bold;
     border-radius: 10px;
@@ -119,7 +115,7 @@ span {
 
 .day-of-week div {
     background-color: rgba(123, 164, 177, 0.493);
-    padding: 20px;
+    padding: 5px;
     text-align: center;
     font-weight: bold;
     border-radius: 10px;
@@ -131,35 +127,14 @@ span {
     background-color: rgba(123, 164, 177, 0.693);
 }
 
-p {
-    font-weight: normal;
-    font-size: medium;
-    line-height: 1.5;
-    margin: 0;
-}
-
-.title {
-    display:grid;
-    padding: 20;
-    text-align: left;
-    font-size: 15px;
-    color: #667c94;
-    margin-bottom: 10px;
-} 
-
 
 .list-container {
-    display: grid;
-    margin-bottom: auto;
-    position: relative;
-    align-items: right;
-    justify-content: right;
-    padding: 20px;
+    grid-row: 1/4;
+    grid-column:5/8;
+    padding: 0px;
     border-radius: 10px;
     font-size: large;
     color: rgba(240, 243, 243, 0.623);
-    margin-inline-start: auto;
-    margin-inline-end: auto;
 }
 
 #überschrift {
@@ -172,17 +147,16 @@ p {
     text-align: end;
 }
 .list-item {
-    margin: 5px 0;
-    padding: 5px;
+    margin: 0% 0;
+    padding: 0%;
     border-bottom: 1px solid #ffffff00;
-    transition: all;
     cursor: pointer;
 }
 .list-item.completed {
     text-decoration: none;
     color: #9e7a7a;
 }
-.list-item button {
+.list-item button { 
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -196,7 +170,6 @@ p {
 .list-item button:focus {
     outline: none;
 }   
-
 
 .heute {
     position: absolute;
