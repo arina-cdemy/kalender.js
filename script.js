@@ -26,6 +26,7 @@ function updateCalendar(date) {
   updateFormattedDateText(date);
   updateWeekdayText(date);
   updateCurrentDateInGermanText(date);
+  updateHistoryList(date);
 }
 
 function getFormattedDate(date) {
@@ -133,40 +134,9 @@ function createCalendar(date) {
     } else if (d.getDay() === 0) {
       cell.classList.add("sunday");
     }
+    cell.addEventListener("click", () => updateCalendar(d));
     grid.appendChild(cell);
   }
-
-  // let prevMonthOverlap = getRestOfPrevMonth(year, month);
-  // let prevMonthDays = daysInMonth(year, month - 1);
-  // console.log("prevMonthDays == ", prevMonthDays);
-  // let daysOfMonth = daysInMonth(year, month);
-  // let nextMonthOverlap = getOverlappingDaysOfNextMonth(year, month);
-  // let ncells = prevMonthOverlap + daysOfMonth + nextMonthOverlap;
-  // console.log("ncells == ", ncells);
-  // console.log("In blah ", prevMonthOverlap, daysOfMonth, nextMonthOverlap);
-  // for (let i = 0; i < ncells; i++) {
-  //   if (i < prevMonthOverlap) {
-  //     let day = new Date(
-  //       year,
-  //       month - 1,
-  //       prevMonthDays - prevMonthOverlap + 1 + i
-  //     );
-  //     console.log("Adding grey prev month ", day);
-  //     addGreyCell(grid, day);
-  //   } else if (i - prevMonthOverlap >= daysOfMonth) {
-  //     const dayNumberNext = i - prevMonthOverlap - daysOfMonth + 1;
-  //     let day = new Date(year, month, dayNumberNext);
-  //     console.log("Adding grey next month", day);
-  //     addGreyCell(grid, day);
-  //   } else if (i - prevMonthOverlap + 1 === day) {
-  //     console.log("Adding today");
-  //     addCurrentDateCell(grid, day);
-  //   } else {
-  //     let day = new Date(year, month, i - prevMonthOverlap + 1);
-  //     console.log("Adding normal day", i - prevMonthOverlap + 1);
-  //     addNormalCell(grid, day);
-  //   }
-  // }
 }
 
 function areDatesEqual(datum1, datum2) {
@@ -294,10 +264,6 @@ function updateWeekdayNumberText(date) {
   document.getElementById("feld1").textContent = weekOfTheMonth(date);
 }
 
-//for (let i = 0; i < days.length; i += 1) {
-//const d = days[i];
-//  console.log(d, weekOfTheMonth(d));
-
 function updateHolidayText(date) {
   document.getElementById("holidayCheck").textContent = isDateHoliday(date)
     ? "ein Feiertag"
@@ -308,6 +274,9 @@ function updateFormattedDateText(date) {
   document.getElementById("kalender-datum").innerText = getFormattedDate(date);
   document.getElementById("aktuelles-datum").textContent =
     getFormattedDate(date);
+  document.getElementById("monthYear").innerText = monate[date.getMonth()];
+  document.getElementById("data").innerText =
+    date.getDate() + " " + monate[date.getMonth()];
 }
 
 function updateWeekdayText(date) {
@@ -340,6 +309,10 @@ async function getData(month, day) {
   }
 }
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 async function updateHistoryList(date) {
   let month = date.getMonth() + 1;
   let day = date.getDate();
@@ -348,7 +321,8 @@ async function updateHistoryList(date) {
   let list = getHistoryEventsList();
   list[0].innerHTML = "";
   for (let i = 0; i < 5; i++) {
-    let event = response.data.Events[i];
+    eventIndex = getRandomInt(response.data.Events.length - 1);
+    let event = response.data.Events[eventIndex];
     let li = document.createElement("li");
     li.classList.add("list-item");
     li.innerHTML = `${event.year}: ${event.text}`;
@@ -363,14 +337,6 @@ function getHistoryEventsList() {
   return container.getElementsByTagName("ul");
 }
 
-function updateDateHistory(date) {
-  let day = date.getDay();
-  let month = monate[date.getMonth()];
-
-  document.getElementById("data").innerHTML = `${day}. ${month}`;
-  console.log(day, month);
-}
-
 function main(date) {
   createCalendar(date);
   updateHolidayText(date);
@@ -379,7 +345,6 @@ function main(date) {
   updateWeekdayText(date);
   updateCurrentDateInGermanText(date);
   updateHistoryList(date);
-  updateDateHistory(date);
 
   document
     .getElementsByClassName("monthChangeButtons")[0]
