@@ -277,7 +277,7 @@ function updateFormattedDateText(date) {
     getFormattedDate(date);
   document.getElementById("monthYear").innerText = monate[date.getMonth()];
   document.getElementById("data").innerText =
-    date.getDate() + " " + monate[date.getMonth()];
+    date.getDate()+ "." + " " + monate[date.getMonth()];
 }
 
 function updateWeekdayText(date) {
