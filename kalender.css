@@ -17,11 +17,10 @@ span {
 .grid-container {
   display: grid;
   grid-template-columns:  
-    repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    repeat(12, 1fr));
   gap: 2rem; /* Einheitliche Abstände zwischen Grid-Items */
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 }
 
@@ -47,16 +46,14 @@ span {
 
 .calendar, 
 .calendar-container {
-  grid-column: 1/3;
-  grid-row: 2/3;
   transform: translateY(30%);
   border: 5px solid rgba(0, 0, 0, 0);
-
+  position: relative;
 }
 
 .calendar-header {
-  grid-column: 1/3;
-  grid-row: 1/;
+  grid-column: 1/4;
+  grid-row: 1/3;
   display: flex;
   max-width: 100%;
   align-items: center;
@@ -69,13 +66,17 @@ span {
   margin-right: 0;
   margin-bottom: 0;
   position: relative;
-  overflow:; scroll;
   box-sizing: border-box;
   padding: clamp(10px, 2vw, 20px); /* Responsive padding */
   font-size: clamp(16px, 4vw, 24px); 
 
 }
-
+.calendar, .calendar-container,
+.calendar-header{
+  grid-column: 1/3;
+  grid-row: 2/3;
+  position: relative;
+}
 /*.calendar-header { border: 2px solid red !important; }
 .calendar { border: 2px solid blue !important; }*/
 
@@ -92,8 +93,9 @@ span {
 }
 
 .seitenkopf {
-  grid: column 1 / 2;
-  grid-row: 1;
+  display: grid;
+  grid-column: 1 / 2;
+  grid-row: 1/2;
   background-color: rgba(123, 164, 177, 0);
   padding: 10px 20px;
   border-radius: 10px;
@@ -101,8 +103,7 @@ span {
 }
 
 .introtext {
-  grid-column: 3/8;
-  grid-row: 1/2;
+  display: grid;
   border-radius: 0px;
   padding: 10px 20px;
   font-size: 20px;
@@ -110,8 +111,6 @@ span {
 }
 .list-container {
   display: grid;
-  grid-row: 2/5;
-  grid-column: 3/8;
   padding: 10px 20px;
   text-align: left;
   border-radius: 10px;
@@ -124,6 +123,12 @@ span {
   margin-top: 0px;
   box-shadow: 0 4px 6px rgba(194, 170, 170, 0.1);
   overflow: hidden
+}
+
+.list-container,
+.introtext{
+  grid-column: 4/12;
+  grid-row: 1/2/3;
 }
 
 .date-grid,
